@@ -9,7 +9,7 @@ const geistSans = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "Beautiful Shadcn UI Landing Page",
+  title: "BLM PKN STAN",
   description:
     "A beautiful landing page built with Shadcn UI, Next.js 15, Tailwind CSS, and Shadcn UI Blocks.",
   keywords: [

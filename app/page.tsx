@@ -1,20 +1,22 @@
-import FAQ from "@/components/faq";
-import Features from "@/components/features";
-import Footer from "@/components/footer";
-import Hero from "@/components/hero";
 import { Navbar } from "@/components/navbar";
-import Pricing from "@/components/pricing";
-import Testimonial from "@/components/testimonial";
+import Beranda from "@/components/01_beranda";
+import Struktur from "@/components/02_struktur";
+import Linimasa from "@/components/03_linimasa";
+import Program from "@/components/04_program";
+import Aktivitas from "@/components/05_aktivitas";
+import Galeri from "@/components/galeri";
+import Footer from "@/components/footer";
 
 export default function Home() {
   return (
     <>
       <Navbar />
-      <Hero />
-      <Features />
-      <FAQ />
-      <Testimonial />
-      <Pricing />
+      <Beranda />
+      <Struktur />
+      <Linimasa />
+      <Program />
+      <Aktivitas />
+      <Galeri />
       <Footer />
     </>
   );
