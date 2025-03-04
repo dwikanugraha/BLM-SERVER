@@ -1,106 +1,89 @@
-import { Button } from "@/components/ui/button";
+"use client";
 
-interface Feature {
-  image: string;
-  title: string;
-  description: string;
-}
+import { PackageCheck, ShoppingCart, Truck } from "lucide-react";
+import {
+  Timeline,
+  TimelineConnector,
+  TimelineContent,
+  TimelineDescription,
+  TimelineDot,
+  TimelineItem,
+  TimelineSeparator,
+  TimelineTitle,
+} from "@/components/ui/timeline";
 
-interface Timeline3Props {
-  heading?: string;
-  description?: string;
-  buttons?: {
-    primary: {
-      text: string;
-      url: string;
-    };
-    secondary: {
-      text: string;
-      url: string;
-    };
-  };
-  features?: Feature[];
-}
-
-export function Timeline3({
-  heading = "Experience the difference with us",
-  description = "We believe in creating lasting partnerships with our clients, focusing on long-term success through collaborative innovation and dedicated support.",
-  buttons = {
-    primary: {
-      text: "Start Now",
-      url: "#",
-    },
-    secondary: {
-      text: "Book a demo",
-      url: "#",
-    },
-  },
-  features = [
-    {
-      image: "https://fastly.picsum.photos/id/27/3264/1836.jpg?hmac=p3BVIgKKQpHhfGRRCbsi2MCAzw8mWBCayBsKxxtWO8g",
-      title: "Dedicated Support",
-      description:
-        "Expanded operations to 5 new countries, reaching millions of new users.",
-    },
-    {
-      image: "https://fastly.picsum.photos/id/28/4928/3264.jpg?hmac=GnYF-RnBUg44PFfU5pcw_Qs0ReOyStdnZ8MtQWJqTfA",
-      title: "Series B Funding",
-      description:
-        "Secured $50M in Series B funding to accelerate product development.",
-    },
-    {
-      image: "https://fastly.picsum.photos/id/24/4855/1803.jpg?hmac=ICVhP1pUXDLXaTkgwDJinSUS59UWalMxf4SOIWb9Ui4",
-      title: "Product Launch",
-      description: "Successfully launched our flagship product to market.",
-    },
-    {
-      image: "https://fastly.picsum.photos/id/25/5000/3333.jpg?hmac=yCz9LeSs-i72Ru0YvvpsoECnCTxZjzGde805gWrAHkM",
-      title: "Company Founded",
-      description: "Started with a vision to revolutionize the industry.",
-    },
-  ],
-}: Timeline3Props) {
+export function Linimasa() {
   return (
-    <section id= "linimasa" className="max-w-screen-xl mx-auto xl:px-0 flex items-center justify-center py-20">
-      <div className="container max-w-6xl">
-        <div className="relative grid gap-16 md:grid-cols-2">
-          <div className="top-40 h-fit md:sticky">
-            <h2 className="mb-6 mt-4 text-4xl font-semibold md:text-5xl">
-              {heading}
-            </h2>
-            <p className="font-medium text-muted-foreground md:text-xl">
-              {description}
-            </p>
-            <div className="mt-8 flex flex-col gap-4 lg:flex-row">
-              <Button className="gap-2" size="lg" asChild>
-                <a href={buttons.primary.url}>{buttons.primary.text}</a>
-              </Button>
-              <Button variant="outline" size="lg" className="gap-2" asChild>
-                <a href={buttons.secondary.url}>{buttons.secondary.text}</a>
-              </Button>
-            </div>
-          </div>
-          <div className="flex flex-col gap-12 md:gap-20">
-            {features.map((feature, index) => (
-              <div key={index} className="rounded-xl border p-2">
-                <img
-                  src={feature.image}
-                  alt={feature.title}
-                  className="aspect-video w-full rounded-xl border border-dashed object-cover"
-                />
-                <div className="p-6">
-                  <h3 className="mb-1 text-2xl font-semibold">
-                    {feature.title}
-                  </h3>
-                  <p className="text-muted-foreground">{feature.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+    <div
+      id="linimasa"
+      className="max-w-screen-xl mx-auto py-8 md:py-16 px-4 sm:px-6 xl:px-0 overflow-x-auto"
+    >
+      <div className="text-center max-w-xl mx-auto">
+        <h2 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight">
+          Linimasa
+        </h2>
       </div>
-    </section>
+      <Timeline
+        orientation="horizontal"
+        className="mt-12 w-full min-h-40 min-w-[600px] md:min-w-full"
+      >
+        {/* Item 1 - Ordered */}
+        <TimelineItem className="flex-1">
+          <TimelineSeparator>
+            <TimelineDot className="p-2 bg-primary/10 text-primary">
+              <ShoppingCart className="h-4 w-4 md:h-5 md:w-5" />
+            </TimelineDot>
+            <TimelineConnector className="flex-1 h-[2px] md:h-[3px] bg-gray-300" />
+          </TimelineSeparator>
+          <TimelineContent className="mt-2 md:mt-4">
+            <TimelineTitle className="text-sm md:text-base font-semibold">
+              Ordered
+            </TimelineTitle>
+            <TimelineDescription className="text-xs md:text-sm mt-1 whitespace-nowrap">
+              9.15 AM, January 1, 2024
+            </TimelineDescription>
+          </TimelineContent>
+        </TimelineItem>
+
+        {/* Item 2 - Shipped */}
+        <TimelineItem className="flex-1">
+          <TimelineSeparator>
+            <TimelineConnector className="flex-1 h-[2px] md:h-[3px] bg-gray-300" />
+            <TimelineDot className="p-2 bg-primary/10 text-primary">
+              <PackageCheck className="h-4 w-4 md:h-5 md:w-5" />
+            </TimelineDot>
+            <TimelineConnector className="flex-1 h-[2px] md:h-[3px] bg-gray-300" />
+          </TimelineSeparator>
+          <TimelineContent className="mt-2 md:mt-4">
+            <TimelineTitle className="text-sm md:text-base font-semibold">
+              Shipped
+            </TimelineTitle>
+            <TimelineDescription className="text-xs md:text-sm mt-1 whitespace-nowrap">
+              12:20 PM, January 4, 2024
+            </TimelineDescription>
+          </TimelineContent>
+        </TimelineItem>
+
+        {/* Item 3 - Out for Delivery */}
+        <TimelineItem className="flex-1">
+          <TimelineSeparator>
+            <TimelineConnector className="flex-1 h-[2px] md:h-[3px] bg-gray-300" />
+            <TimelineDot className="p-2 bg-primary/10 text-primary">
+              <Truck className="h-4 w-4 md:h-5 md:w-5" />
+            </TimelineDot>
+          </TimelineSeparator>
+          <TimelineContent className="mt-2 md:mt-4">
+            <TimelineTitle className="text-sm md:text-base font-semibold">
+              Out for Delivery
+            </TimelineTitle>
+            <TimelineDescription className="text-xs md:text-sm mt-1 whitespace-nowrap">
+              07:00 AM, January 8, 2024
+            </TimelineDescription>
+          </TimelineContent>
+        </TimelineItem>
+      </Timeline>
+    </div>
   );
 }
 
-export default Timeline3;
+export default Linimasa;

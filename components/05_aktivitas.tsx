@@ -1,7 +1,7 @@
 "use client"
 import React, { useState, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { ChevronRight } from "lucide-react";
 import {
@@ -96,7 +96,7 @@ const Aktivitas = () => {
   // Visible page numbers (always show 3 consecutive numbers)
   const getVisiblePages = () => {
     let startPage = Math.max(1, currentPage - 1);
-    let endPage = Math.min(startPage + 2, totalPages);
+    const endPage = Math.min(startPage + 2, totalPages);
     
     // Adjust if we're at the beginning
     if (endPage - startPage < 2) {
