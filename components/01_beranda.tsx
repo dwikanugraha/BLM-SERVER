@@ -4,14 +4,11 @@ import React from "react";
 
 const Beranda = () => {
   return (
-    <div id="beranda" className="min-h-screen pt-12 sm:pt-16 lg:py-36 xl:py-48">
+    <div id="beranda" className="min-h-screen pt-12 sm:pt-16 lg:py-36 xl:py-48 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-0">
       <div className="absolute inset-x-0 top-0 hidden lg:block">
-        <div className="py-5">
-          <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl"></div>
-        </div>
       </div>
 
-      <div className="relative px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
+      <div className="relative max-w-screen-xl w-full mx-auto">
         <div>
           <h1 className="mt-6 max-w-[17ch] text-4xl md:text-5xl lg:text-[2.75rem] xl:text-5xl font-bold !leading-[1.2]">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.

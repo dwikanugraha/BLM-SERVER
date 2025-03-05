@@ -8,9 +8,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import { NavigationMenuProps } from "@radix-ui/react-navigation-menu";
 import Link from "next/link";
-import { useState, useRef, useEffect } from "react";
-import { Moon, Sun } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { useState, useRef, useEffect, useMemo } from "react";
 
 export const NavMenu = (props: NavigationMenuProps) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -24,13 +22,13 @@ export const NavMenu = (props: NavigationMenuProps) => {
   const isVertical = props.orientation === "vertical";
 
   // Get menu items for easier handling
-  const menuItems = [
+  const menuItems = useMemo(() => [
     { label: "Beranda", href: "#beranda" },
     { label: "Struktur", href: "#struktur" },
     { label: "Linimasa", href: "#linimasa" },
     { label: "Program", href: "#program" },
     { label: "Aktivitas", href: "#aktivitas" },
-  ];
+  ], []);
 
   useEffect(() => {
     if (!isVertical && hoveredIndex !== null) {
@@ -75,37 +73,26 @@ export const NavMenu = (props: NavigationMenuProps) => {
 
   // Scroll spy effect to track which section is currently in view
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + 100; // Offset for header
-
-      // Get all sections with IDs matching our menu items
-      const sections = menuItems.map(item => {
-        const id = item.href.replace('#', '');
-        const element = document.getElementById(id);
-        return { id, element };
-      });
-
-      // Find the section currently in view
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const { element } = sections[i];
-        if (element && element.offsetTop <= scrollPosition) {
-          setActiveIndex(i);
-          break;
-        }
-      }
-    };
-
-    // Add scroll event listener
-    window.addEventListener('scroll', handleScroll);
-    
-    // Call handleScroll on mount to set initial active menu item
-    handleScroll();
-
-    // Clean up event listener on unmount
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = menuItems.findIndex((item) => `#${entry.target.id}` === item.href);
+            if (index !== -1) setActiveIndex(index);
+          }
+        });
+      },
+      { rootMargin: " 0px 0px 0px", threshold: 0.6 } // Adjust offset for header
+    );
+  
+    menuItems.forEach((item) => {
+      const section = document.getElementById(item.href.replace("#", ""));
+      if (section) observer.observe(section);
+    });
+  
+    return () => observer.disconnect();
   }, [menuItems]);
+  
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
@@ -155,18 +142,6 @@ export const NavMenu = (props: NavigationMenuProps) => {
   return (
     <header className="sticky top-0 z-50 w-full">
       <div className="container flex h-14 max-w-screen-2xl items-center justify-center">
-        <Button
-          variant="ghost"
-          size="icon"
-          className="absolute right-4"
-          onClick={toggleDarkMode}
-        >
-          {isDarkMode ? (
-            <Sun className="h-[1.2rem] w-[1.2rem]" />
-          ) : (
-            <Moon className="h-[1.2rem] w-[1.2rem]" />
-          )}
-        </Button>
 
         <div className="p-0 relative">
           <div className="relative">
@@ -191,7 +166,10 @@ export const NavMenu = (props: NavigationMenuProps) => {
                 {menuItems.map((item, index) => (
                   <NavigationMenuItem 
                     key={index}
-                    ref={(el) => (itemRefs.current[index] = el)}
+                    ref={(el) => {
+                      // Use functional update to ensure correct type
+                      itemRefs.current[index] = el;
+                    }}
                     className={`px-3 py-2 cursor-pointer transition-colors duration-300 h-[30px] ${
                       index === activeIndex
                         ? "text-[#0e0e10] dark:text-white"

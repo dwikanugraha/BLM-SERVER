@@ -1,81 +1,50 @@
-import Image from "next/image";
+import React from 'react';
+import { 
+  UiTimeline, 
+  UiTimelineItem, 
+  UiTimelineHeader, 
+  UiTimelineSeparator, 
+  UiTimelineDate, 
+  UiTimelineTitle, 
+  UiTimelineIndicator 
+} from '@/components/ui/timeline';
 
-const teamMembers = [
-  {
-    name: "John Doe",
-    title: "Founder & CEO",
-    imageUrl:
-      "",
-  },
-  {
-    name: "Jane Doe",
-    title: "Engineering Manager",
-    imageUrl:
-      "",
-  },
-  {
-    name: "Bob Smith",
-    title: "Product Manager",
-    imageUrl:
-      "",
-  },
-  {
-    name: "Peter Johnson",
-    title: "Frontend Developer",
-    imageUrl:
-      "",
-  },
-  {
-    name: "David Lee",
-    title: "Backend Developer",
-    imageUrl:
-      "",
-  },
-  {
-    name: "Sarah Williams",
-    title: "Product Designer",
-    imageUrl:
-      "",
-  },
-  {
-    name: "Michael Brown",
-    title: "UX Researcher",
-    imageUrl:
-      "",
-  },
-  {
-    name: "Elizabeth Johnson",
-    title: "Customer Success",
-    imageUrl:
-      "",
-  },
-];
-const Team01Page = () => {
+interface TimelineItem {
+  id: number;
+  date: string;
+  title: string;
+}
+
+const ProjectTimeline: React.FC = () => {
+  const items: TimelineItem[] = [
+    { id: 1, date: "Mar 15, 2024", title: "Project Kickoff" },
+    { id: 2, date: "Mar 22, 2024", title: "Design Phase" },
+    { id: 3, date: "Apr 5, 2024", title: "Development Sprint" },
+    { id: 4, date: "Apr 19, 2024", title: "Testing & Deployment" },
+    { id: 5, date: "May 3, 2024", title: "User Training" },
+    { id: 6, date: "May 17, 2024", title: "Project Handover" },
+  ];
+
   return (
-    <div id="struktur" className="max-w-screen-xl mx-auto py-16 px-6 xl:px-0">
-      <div className="text-center max-w-xl mx-auto">
-        <h2 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight">
-          Struktur Organisasi
-        </h2>
-      </div>
-
-      <div className="mt-20 w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-12 max-w-screen-lg mx-auto">
-        {teamMembers.map((member) => (
-          <div key={member.name} className="text-center">
-            <Image
-              src={member.imageUrl}
-              alt={member.name}
-              className="h-20 w-20 rounded-full object-cover mx-auto bg-secondary"
-              width={120}
-              height={120}
-            />
-            <h3 className="mt-4 text-lg font-semibold">{member.name}</h3>
-            <p className="text-muted-foreground">{member.title}</p>
-          </div>
+    <div>
+      <UiTimeline modelValue={3}>
+        {items.map((item) => (
+          <UiTimelineItem
+            key={item.id}
+            step={item.id}
+            className="w-[calc(50%-1.5rem)] odd:!ml-auto odd:ms-auto even:text-right even:group-data-[orientation=vertical]/timeline:me-8 even:group-data-[orientation=vertical]/timeline:ms-0 [&_[data-slot=timeline-indicator]]:group-data-[orientation=vertical]/timeline:even:-right-6 [&_[data-slot=timeline-indicator]]:group-data-[orientation=vertical]/timeline:even:left-auto [&_[data-slot=timeline-indicator]]:group-data-[orientation=vertical]/timeline:even:translate-x-1/2 [&_[data-slot=timeline-separator]]:group-data-[orientation=vertical]/timeline:even:-right-6 [&_[data-slot=timeline-separator]]:group-data-[orientation=vertical]/timeline:even:left-auto [&_[data-slot=timeline-separator]]:group-data-[orientation=vertical]/timeline:even:translate-x-1/2"
+          >
+            <UiTimelineHeader>
+              <UiTimelineSeparator />
+              <UiTimelineDate>{item.date}</UiTimelineDate>
+              <UiTimelineTitle>{item.title}</UiTimelineTitle>
+              <UiTimelineIndicator />
+            </UiTimelineHeader>
+          </UiTimelineItem>
         ))}
-      </div>
+      </UiTimeline>
     </div>
   );
 };
 
-export default Team01Page;
+export default ProjectTimeline;

@@ -1,7 +1,13 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  /* config options here */
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  images: {
+    domains: [
+      'assets.aceternity.com', 
+      'fastly.picsum.photos',
+      "img.freepik.com", 
+      // Add any other image hostnames you want to use
+    ],
+  },
 };
 
-export default nextConfig;
+module.exports = nextConfig;
