@@ -7,7 +7,14 @@ const Beranda = () => {
     <div id="beranda" className="min-h-screen pt-12 sm:pt-16 lg:py-36 xl:py-48 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-0">
       <div className="absolute inset-x-0 top-0 hidden lg:block">
       </div>
-
+      <div className="absolute inset-0 z-0">
+        <img 
+          src="tes.png"
+          alt="Background" 
+          className="w-full h-full object-cover"
+        />
+        {/* Optional overlay for better text readability */}
+      </div>
       <div className="relative max-w-screen-xl w-full mx-auto">
         <div>
           <h1 className="mt-6 max-w-[17ch] text-4xl md:text-5xl lg:text-[2.75rem] xl:text-5xl font-bold !leading-[1.2]">

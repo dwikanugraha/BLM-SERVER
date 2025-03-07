@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/tooltip";
 import { Check, Home, Truck, Package, ShoppingBag, Clock } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { color } from "framer-motion";
 
 interface TimelineItem {
   title: string;
@@ -76,9 +77,9 @@ const OrderTimeline: React.FC<OrderTimelineProps> = ({
   className,
 }) => {
   return (
-    <div className={cn("relative space-y-8", className)}>
+    <div className={cn("relative space-y-8 -top-0 md:-top-4", className)}>
       {/* Garis timeline di tengah / kiri */}
-      <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-gradient-to-b from-transparent via-slate-200 to-transparent" />
+      <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-gradient-to-b from-current via-slate-400 to-transparent" />
 
       {items.map((item, index) => (
         <div
@@ -95,7 +96,7 @@ const OrderTimeline: React.FC<OrderTimelineProps> = ({
               <TooltipTrigger asChild>
                 <div
                   className={cn(
-                    "z-10 flex h-12 w-12 items-center justify-center rounded-full border-2 shadow-md bg-current"
+                    "z-10 flex h-12 w-12 items-center justify-center rounded-full border-2 shadow-md bg-white dark:bg-black",
                   )}
                 >
                   {getItemIcon(item.icon)}
@@ -149,7 +150,7 @@ const OrderTimeline: React.FC<OrderTimelineProps> = ({
  */
 function getItemIcon(icon: TimelineItem["icon"]) {
   const size = 20;
-  const iconProps = { size, strokeWidth: 2, className: "text-gray-white dark:text-black", };
+  const iconProps = { size, strokeWidth: 2};
 
   switch (icon) {
     case "ordered":
