@@ -1,22 +1,24 @@
+"use client"
 import { cn } from "@/lib/utils";
 import { Marquee } from "@/components/ui/marquee";
+import { useEffect, useState } from "react";
 
-const reviews = [
-  "https://afterschool.id/wp-content/uploads/2022/05/foto-stan-1.jpg",
-  "https://assets.promediateknologi.id/crop/0x0:0x0/750x500/webp/photo/2023/01/06/2369602774.jpg",
-  "https://static.promediateknologi.id/crop/0x0:0x0/750x500/webp/photo/p1/964/2024/05/18/WhatsApp-Image-2024-05-18-at-202634-2294427949.jpeg",
-  "https://www.indofira.co.id/images/artikel/473-stan3.jpg",
-  "https://asset.kompas.com/crops/x1RKucV4ADUsXtbBt7Y85T6E4yQ=/0x163:561x537/750x500/data/photo/2019/07/31/5d4119cd6e9c7.png",
-  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSf9Q1NY8lLDyXrMI058RLGIFR8MzMjtBPOUQ&s",
-];
+interface Photo {
+  url: string;
+  // Tambahkan properti lain jika diperlukan
+}
 
-const firstRow = reviews.slice(0, reviews.length);
+interface GaleriData {
+  id: number;
+  photo: Photo[];
+  // Tambahkan properti lain sesuai response API
+}
 
 const ReviewCard = ({ img }: { img: string }) => {
   return (
     <div
       className={cn(
-        "relative h-60 w-154 overflow-hidden rounded-xl border",
+        "relative h-60 w-80 overflow-hidden rounded-xl border",
         "border-gray-950/[.1] bg-gray-950/[.01] dark:border-gray-50/[.1] dark:bg-gray-50/[.10]"
       )}
     >
@@ -26,14 +28,43 @@ const ReviewCard = ({ img }: { img: string }) => {
 };
 
 export function MarqueeDemo() {
+  const [galleryData, setGalleryData] = useState<GaleriData[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:1337/api/galeris?populate=*');
+        if (!response.ok) {
+          throw new Error('Gagal mengambil data');
+        }
+        const data = await response.json();
+        setGalleryData(data.data);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Terjadi kesalahan');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) return <div>Memuat...</div>;
+  if (error) return <div>Error: {error}</div>;
+  if (!galleryData || galleryData.length === 0) return <div>Tidak ada data</div>;
+
+  const firstRow = galleryData[0].photo.map((photo) => 
+    `http://localhost:1337${photo.url}`
+  );
+
   return (
-    <div className="relative flex w-full flex-col items-center justify-center overflow-hidden">
-      <Marquee pauseOnHover className="[--duration:30s]">
-        {firstRow.map((img, index) => (
-          <ReviewCard key={index} img={img} />
-        ))}
-      </Marquee>
-    </div>
+    <Marquee pauseOnHover className="py-8">
+      {firstRow.map((img, index) => (
+        <ReviewCard key={index} img={img} />
+      ))}
+    </Marquee>
   );
 }
 

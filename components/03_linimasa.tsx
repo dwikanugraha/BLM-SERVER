@@ -1,4 +1,6 @@
+import React from "react";
 import { Button } from "@/components/ui/button";
+import OrderTimeline from "./tesss";
 
 interface Feature {
   image: string;
@@ -7,9 +9,9 @@ interface Feature {
 }
 
 interface Timeline3Props {
-  heading: string;
-  description: string;
-  buttons: {
+  heading?: string;
+  description?: string;
+  buttons?: {
     primary: {
       text: string;
       url: string;
@@ -23,7 +25,7 @@ interface Timeline3Props {
 }
 
 const Timeline3 = ({
-  heading = "Experience the difference with us",
+  heading = "Linimasa",
   description = "We believe in creating lasting partnerships with our clients, focusing on long-term success through collaborative innovation and dedicated support.",
   buttons = {
     primary: {
@@ -61,46 +63,25 @@ const Timeline3 = ({
   ],
 }: Timeline3Props) => {
   return (
-    <section id="linimasa" className="min-h-screen flex items-center justify-center py-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-0">
+    <section
+      id="linimasa"
+      className="flex min-h-screen items-center justify-center px-4 sm:px-6 md:px-8 lg:px-12 xl:px-0 py-16"
+    >
       <div className="container max-w-7xl">
-      <div className="text-center max-w-xl mx-auto">
-        <h2 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight items-center  justify-center pb-16">
-          Linimasa
-        </h2>
-      </div>
-        <div className="relative grid gap-16 md:grid-cols-2">
+        <div className="relative grid md:gap-16 md:grid-cols-2">
+          {/* Bagian Kiri (Teks, Heading, Tombol) */}
           <div className="top-40 h-fit md:sticky">
             <h2 className="mb-6 mt-4 text-4xl font-semibold md:text-5xl">
               {heading}
             </h2>
-            <p className="font-medium text-muted-foreground md:text-xl">
+            <p className="font-medium text-muted-foreground text-[17px]">
               {description}
             </p>
-            <div className="mt-8 flex flex-col gap-4 lg:flex-row">
-              <Button className="gap-2" size="lg" asChild>
-                <a href={buttons.primary.url}>{buttons.primary.text}</a>
-              </Button>
-              <Button variant="outline" size="lg" className="gap-2" asChild>
-                <a href={buttons.secondary.url}>{buttons.secondary.text}</a>
-              </Button>
-            </div>
           </div>
-          <div className="flex flex-col gap-12 md:gap-20">
-            {features.map((feature, index) => (
-              <div key={index} className="rounded-xl border p-2">
-                <img
-                  src={feature.image}
-                  alt={feature.title}
-                  className="aspect-video w-full rounded-xl border border-dashed object-cover"
-                />
-                <div className="p-6">
-                  <h3 className="mb-1 text-2xl font-semibold">
-                    {feature.title}
-                  </h3>
-                  <p className="text-muted-foreground">{feature.description}</p>
-                </div>
-              </div>
-            ))}
+
+          {/* Bagian Kanan (Timeline) */}
+          <div>
+            <OrderTimeline />
           </div>
         </div>
       </div>

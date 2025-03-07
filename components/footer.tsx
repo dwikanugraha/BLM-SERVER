@@ -36,7 +36,7 @@ const footerLinks = [
   },
 ];
 
-const Footer04Page = () => {
+const Footer = () => {
   return (
     <div className="min-h-fit flex flex-col">
       <Separator className="my-4" />
@@ -119,4 +119,4 @@ const Footer04Page = () => {
   );
 };
 
-export default Footer04Page;
+export default Footer;

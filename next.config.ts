@@ -5,6 +5,7 @@ const nextConfig = {
       'assets.aceternity.com', 
       'fastly.picsum.photos',
       "img.freepik.com", 
+      "localhost",
       // Add any other image hostnames you want to use
     ],
   },

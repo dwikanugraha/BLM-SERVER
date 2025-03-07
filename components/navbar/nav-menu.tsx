@@ -82,7 +82,7 @@ export const NavMenu = (props: NavigationMenuProps) => {
           }
         });
       },
-      { rootMargin: " 0px 0px 0px", threshold: 0.6 } // Adjust offset for header
+      { rootMargin: " 100px 0px 0px 0px", threshold: 0.6 } // Adjust offset for header
     );
   
     menuItems.forEach((item) => {

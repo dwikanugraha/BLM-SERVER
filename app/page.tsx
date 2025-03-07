@@ -5,20 +5,20 @@ import Linimasa from "@/components/03_linimasa";
 import Program from "@/components/04_program";
 import Aktivitas from "@/components/05_aktivitas";
 import Galeri from "@/components/galeri";
-import ExpandableCardDemo from "@/components/tes";
 import Footer from "@/components/footer";
+import Tes from "@/components/tesss";
 
 export default function Home() {
   return (
     <>
       <Navbar />
       <Beranda />
-      <ExpandableCardDemo />
+      {/* <Tes /> */}
+      <Struktur />
       <Linimasa />
       <Program />
       <Aktivitas />
       <Galeri />
-
       <Footer />
     </>
   );
